@@ -1,46 +1,44 @@
-# 2. Alegeti 2 clase din cele implementate la tema anterioara, si scrieti unit teste
-# pentru toate metodele, folosind unittest.
 from dataclasses import dataclass
 
 
 @dataclass
 class Employee:
-    nume: str
-    prenume: str
-    salariu: float
+    first_name: str
+    last_name: str
+    salary: float
 
-    def descrie(self):
-        return f'Nume: {self.nume}, Prenume: {self.prenume}, Salariu: {self.salariu}'
+    def describe(self):
+        return f'Emplyee`s first name: {self.first_name}, last name: {self.last_name}, salary: {self.salary}'
 
-    def nume_complet(self):
-        return f'{self.nume} {self.prenume}'
+    def full_name(self):
+        return f'{self.first_name} {self.last_name}'
 
-    def salariu_lunar(self):
-        return self.salariu
+    def monthly_salary(self):
+        return self.salary
 
-    def salariu_anual(self):
-        return self.salariu * 12
+    def annual_salary(self):
+        return self.salary * 12
 
-    def review_salariu(self, procent):
-        calc_procent = self.salariu * (procent * 0.01)
-        self.salariu = self.salariu + int(calc_procent)
+    def salary_review(self, percentage):
+        calc_percentage = self.salary * (percentage * 0.01)
+        self.salary = self.salary + int(calc_percentage)
 
 
 @dataclass
-class ContBancar:
+class BankAccount:
     iban: str
-    titular_cont: str
-    sold: float
+    account_holder: str
+    balance: float
 
-    def afisare_sold(self):
-        return f'Titularul {self.titular_cont} are în contul {self.iban}, suma de {self.sold:.2f} lei'
+    def show_balance(self):
+        return f'Account holder {self.account_holder} with IBAN account {self.iban}, has the current balance of {self.balance:.2f} RON'
 
-    def debitare_cont(self, suma):
-        if suma > self.sold:
-            print('Fonduri insuficiente!')
+    def debit(self, amount):
+        if amount > self.balance:
+            print('Insufficient funds!')
         else:
-            self.sold -= suma
-            print(f"Suma de: {suma:.2f} RON a fost debitata din cont")
+            self.balance -= amount
+            print(f"The amount of: {amount:.2f} RON, was debited from the account")
 
-    def creditare_cont(self, suma):
-        self.sold = self.sold + suma
+    def credit(self, amount):
+        self.balance = self.balance + amount

@@ -1,5 +1,3 @@
-# 1. Alegeti 3 functii din cele implementate la tema anterioara, si scrieti unit tests pentru ele folosind unittest.
-
 def get_positive_numbers(lst):
     new_list = []
     for nr in lst:
