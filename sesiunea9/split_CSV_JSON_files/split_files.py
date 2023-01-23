@@ -20,7 +20,7 @@ def split_in_half_CSV_file(file_name, first_file, second_file, use_header):
     with open(file_name, "r") as f:
         reader = csv.reader(f)
         data = list(reader)
-        header = data[:1]
+        header = data[0]
         first_half = data[0:((len(data) + 1) // 2)] if use_header else data[:(len(data) // 2)]
         second_half = header + data[((len(data) + 1) // 2):] if use_header else data[(len(data) // 2):]
     with open(first_file, "w", ) as f:
