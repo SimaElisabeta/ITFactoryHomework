@@ -21,6 +21,10 @@ class AbstractMarketplaceRepository(ABC):
     def delete(self, entity_id):
         pass
 
+    @abstractmethod
+    def product_exists(self, name):
+        pass
+
 
 class CSVMarketplaceRepository(AbstractMarketplaceRepository):
     def __init__(self, file_name):
@@ -35,21 +39,28 @@ class CSVMarketplaceRepository(AbstractMarketplaceRepository):
             self.data = list(reader)
             return self.data
 
-    def add(self, product):
+    def add(self, entity):
         with open(self.file_name, "a", newline='') as f:
             writer = csv.writer(f)
-            writer.writerow(product)
+            writer.writerow(entity)
             self.data = None
 
-    def delete(self, product_id):
+    def product_exists(self, name):
+        self.read()
+        for row in self.data:
+            if row[1] == name:
+                return True
+        return False
+
+    def delete(self, entity_id):
         self.data = self.read()
         changed = False
         for elem in self.data:
-            if elem[0] == product_id:
+            if elem[0] == entity_id:
                 changed = True
                 self.data.remove(elem)
         if not changed:
-            raise EntityNotFoundException(f'Entity with ID: {product_id} not found!')
+            raise EntityNotFoundException(f'Entity with ID: {entity_id} not found!')
         with open(self.file_name, 'w', newline='') as f:
             writer = csv.writer(f)
             writer.writerows(self.data)
@@ -70,20 +81,27 @@ class JSONMarketplaceRepository(AbstractMarketplaceRepository):
                 self.data = []
             return self.data
 
-    def add(self, product):
+    def add(self, entity):
         with open(self.file_name, 'w') as f:
             self.data = self.read()
-            self.data.append(product)
+            self.data.append(entity)
             json.dump(self.data, f, indent=4)
 
-    def delete(self, product_id):
+    def product_exists(self, name):
+        self.read()
+        for row in self.data:
+            if row["name"] == name:
+                return True
+        return False
+
+    def delete(self, entity_id):
         self.data = self.read()
         changed = False
         for elem in self.data:
-            if str(elem.get("ID")) == product_id:
+            if str(elem.get("ID")) == entity_id:
                 changed = True
                 self.data.remove(elem)
         if not changed:
-            raise EntityNotFoundException(f'Entity with ID: {product_id} not found!')
+            raise EntityNotFoundException(f'Entity with ID: {entity_id} not found!')
         with open(self.file_name, 'w') as f:
             json.dump(self.data, f, indent=4)

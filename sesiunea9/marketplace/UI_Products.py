@@ -1,3 +1,4 @@
+from sesiunea9.marketplace.DBProducts import Product
 from sesiunea9.marketplace.marketplace_repository import CSVMarketplaceRepository, JSONMarketplaceRepository
 from pprint import pprint
 
@@ -31,12 +32,15 @@ def print_menu():
 
 def add_product(repository, repo_type):
     name = input('Enter product name: ')
+    if repository.product_exists(name):
+        print(f'Product {name} already exists')
+        return
     price = float(input('Enter product price: '))
-    product_id = abs(hash(name) + hash(price))
+    product = Product(name, price)
     if repo_type == 'csv':
-        repository.add([product_id, name, price])
+        repository.add(product.convert_to_list())
     else:
-        repository.add({'ID': product_id, 'name': name, 'price': price})
+        repository.add(product.convert_to_dict())
 
 
 def delete_product(repository):
@@ -63,7 +67,7 @@ def run():
         elif product_input == 4:
             exit(0)
         else:
-            print('Comanda invalida!')
+            print('Invalid command!')
 
 
 run()
