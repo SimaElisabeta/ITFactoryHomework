@@ -1,0 +1,28 @@
+[
+  {
+    "username": "booker12",
+    "first_name": "Rachel",
+    "last_name": "Not Booker",
+    "update": "True"
+  },
+  {
+    "username": "grey07",
+    "first_name": "Laura",
+    "last_name": "Grey"
+  },
+  {
+    "username": "johnson81",
+    "first_name": "Craig",
+    "last_name": "Johnson"
+  },
+  {
+    "username": "jenkins46",
+    "first_name": "Mary",
+    "last_name": "Jenkins"
+  },
+  {
+    "username": "post_test",
+    "first_name": "Test 1",
+    "last_name": "Post"
+  }
+]

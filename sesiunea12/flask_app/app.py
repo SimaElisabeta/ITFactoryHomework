@@ -33,7 +33,6 @@ def get_product(name):
 @app.route("/product/<name>", methods=["PUT"])
 def update_all_product_data(name):
     product = request.json
-    print(product)
     try:
         repo.update_all_product_data(name, product)
         return "OK", 201
