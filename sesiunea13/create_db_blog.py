@@ -41,6 +41,7 @@ class Comment(Base):
 
 # connect to db
 engine = create_engine('sqlite:///blog.db')
+
 # create all tables
 Base.metadata.create_all(engine)
 
@@ -48,7 +49,7 @@ Base.metadata.create_all(engine)
 Session = sessionmaker(bind=engine)
 session = Session()
 
-# add users
+# add into table
 users = [User(first_name='John', last_name='Snow', email='jsnow99@gmail.com', username='john_the_only'),
          User(first_name='Billy', last_name='White', email='billy@gmail.com', username='billy'),
          User(first_name='Jessy', last_name='Caron', email='jcaron@gmail.com', username='jess_caron')]
