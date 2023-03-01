@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{article.title}}
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <br>
+        <img src="{{article.image_url}}"><br>
+        <h3>{{article.title}}</h3>
+        <small>By: {{article.author.first_name}} {{article.author.last_name}}</small><br>
+        <hr>
+        <span class="badge rounded-pill bg-secondary">#{{article.category}}</span>
+        <br><br>
+
+        <p>
+            {{article.content}}
+        </p>
+
+        <br>
+        <button type="button" class="btn btn-light"><a href="{% url 'blog_page:home' %}"> Back </a></button>
+    </div>
+
+{% endblock %}
