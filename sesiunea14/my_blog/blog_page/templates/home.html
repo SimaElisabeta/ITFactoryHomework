@@ -3,19 +3,19 @@
 
 {% block content %}
 
-<div class="container">
-    <br>
-    {% if articles %}
-    <h4><small>RECENT POSTS</small></h4>
-    <hr>
-    <ul>
-        {% for article in articles %}
-        <li>
-            <h2><a href="{% url 'blog_page:article_details' article.id %}">{{article.title}}</a></h2>
-            <b>Post by: {{article.author.first_name}} {{article.author.last_name}}</b><br>
-        </li>
-        {% endfor %}
-    </ul>
+
+<br>
+{% if articles %}
+<h4><small>RECENT POSTS</small></h4>
+<hr>
+<ul class="nav nav-pills nav-stacked">
+    {% for article in articles %}
+    <li>
+        <h2><a href="{% url 'blog_page:article_details' article.id %}">{{article.title}}</a></h2>
+        <b>Post by: {{article.author.first_name}} {{article.author.last_name}}</b><br>
+    </li>
+    {% endfor %}
+</ul>
 {% endif %}
-</div>
+
 {% endblock %}
